@@ -26,7 +26,7 @@ Ngdc.set({
 ### HTML
 
 ```html
-<script src="bower_components/angular-dynamic-constants.js"></script>
+<script src="bower_components/angular-dynamic-constants.min.js"></script>
 <script src="config/server.json.js"></script>
 <script src="config/endpoints.json.js"></script>
 ```
