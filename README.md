@@ -5,7 +5,7 @@ Angular Dynamic Constants is a javascript helper that allows you to separate con
 
 ## How to use it
 
-Configuration files.
+### Configuration files.
 ```js
 // File: server.json.js
 Ngdc.set({
@@ -14,7 +14,7 @@ Ngdc.set({
     }
 });
 
-// File endpoints.json.js
+// File: endpoints.json.js
 Ngdc.set({
     endpoints: {
        version: "v1",
@@ -40,7 +40,7 @@ Ngdc.config({app: app, constant: "Config"});
 
 ```
 
-### Accessing to constants: endpoints.api
+### Accessing to: endpoints.api
 
 ```js
 app.controller('Ctrl', ['Config', function(Config){
