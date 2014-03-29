@@ -42,7 +42,7 @@ adc.set({
 
 HTML
 ----
-```javascript
+```html
 <script src="src/angular-dynamic-constants.js"></script>
 <script src="config/server.json.js"></script>
 <script src="config/endpoints.json.js"></script>
