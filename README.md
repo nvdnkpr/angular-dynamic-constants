@@ -58,6 +58,9 @@ var c = new AngularDynamicConstants({
 });
 ```
 
+
+From Example
+
 ```
 app.controller('Ctrl', ['$scope', 'Config', function($scope, Config){
 
