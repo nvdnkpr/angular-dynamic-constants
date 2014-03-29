@@ -31,7 +31,7 @@ Ngdc.set({
 <script src="config/endpoints.json.js"></script>
 ```
 
-### Configuration
+### Setup
 ```javascript
 // File: app.js
 var app = angular.module("app", []);
@@ -40,7 +40,7 @@ Ngdc.config({app: app, constant: "Config"});
 
 ```
 
-### Accessing to: endpoints.api
+### How to get configuration settings
 
 ```js
 app.controller('Ctrl', ['Config', function(Config){
