@@ -1,0 +1,20 @@
+{
+  "name": "angular-dynamic-constants",
+  "version": "0.1.0",
+  "homepage": "https://github.com/yagoferrer/angular-dynamic-constants",
+  "authors": [
+    "yago.ferrer@gmail.com"
+  ],
+  "description": "separate configuration files into small files and generate dynamic constants",
+  "license": "GPL v2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.2.15"
+  }
+}

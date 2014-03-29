@@ -1,33 +1,43 @@
 angular-dynamic-constants
 =========================
 
-Angular configuration files can be large and applying DRY can be tedious.
+Angular configuration files can get large and applying DRY can be tedious.
 
 In this project I provide a solution to separate configuration files into small files
-and generate dynamic constants from these files.
+and generate dynamic constants from these files so that they can share values.
 
 
-How to create your configuration files?
+This is an example on how to create configuration files.
 
-config/server.jsonp
+config/server.json.js
 ```
 adc.set({
     server: {
-        protocol: "http"
-        host: "localhost"
+        protocol: "http",
+        host: "localhost",
         port: 8080
     }
-})
+});
 ```
 
-config/endpoints.jsonp
+config/endpoints.json.js
 
 ```
 adc.set({
     endpoints: {
         api: "{server.protocol}://{server.host}:{server.port}/api"
     }
-})
+});
+```
+
+config/services.json.js
+```
+adc.set({
+    services: {
+        version: 1,
+        contacts: "{endpoints.api}/v{version}/contacts"
+    }
+});
 ```
 
 HTML
@@ -39,17 +49,22 @@ HTML
 
 ANGULAR
 ```
-var app = angular.module("app", ["angular-dynamic-constants"]);
+var app = angular.module("app", []);
+
+var c = new AngularDynamicConstants({
+    app: app,
+    constant: "Config"
+});
 
 ....
 
-constant("endpoints")
+constant("services.contacts")
 
 
 Will be:
 
 {
-    api: "http://localhost:8080/api"
+    api: "http://localhost:8080/api/v1/contacts"
 }
 
 

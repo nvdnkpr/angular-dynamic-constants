@@ -1,0 +1,7 @@
+adc.set({
+    server: {
+        protocol: "http",
+        host: "localhost",
+        port: "8080"
+    }
+});
