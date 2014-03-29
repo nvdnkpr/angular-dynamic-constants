@@ -42,9 +42,10 @@ adc.set({
 
 HTML
 ```
-<script type="text/javascript" src="angular-dynamic-constants.js"></script>
-<script type="text/javascript" src="config/server.jsonp"></script>
-<script type="text/javascript" src="config/endpoints.jsonp"></script>
+<script src="src/angular-dynamic-constants.js"></script>
+<script src="config/server.json.js"></script>
+<script src="config/endpoints.json.js"></script>
+<script src="config/services.json.js"></script>
 ```
 
 ANGULAR
@@ -55,17 +56,20 @@ var c = new AngularDynamicConstants({
     app: app,
     constant: "Config"
 });
+```
 
-....
+```
+app.controller('Ctrl', ['$scope', 'Config', function($scope, Config){
 
-constant("services.contacts")
+    $scope.config = Config.services.contacts
+
+}]);
 
 
-Will be:
+$scope.config it will be:
 
 {
     api: "http://localhost:8080/api/v1/contacts"
 }
-
 
 ```
