@@ -1,8 +1,17 @@
 var Ngdc = {
-    cache: {},
+    cache: {}, //@todo: use HTML5 WebStorage
     set: function(json) {
-        var keys = Object.keys(json);
-        this.cache[keys[0]] = json[keys[0]];
+
+        for (var i in json) {
+
+            // If the key exists, extend the object.
+            if (this.cache[i]) {
+                angular.extend(this.cache[i], json[i]);
+            } else {
+                this.cache[i] = json[i];
+            }
+        }
+
     },
     config: function(setup) {
 
@@ -12,21 +21,18 @@ var Ngdc = {
 
         var item;
 
-        for (var i in this.cache) {
 
+        for (var i in this.cache) {
             item = this.cache[i];
 
+            //@todo: move this to a method.
             for (var j in item) {
-
                 item[j] = item[j].replace(/\{([A-Za-z0-9_.]+)\}/g, function(m, p1) {
-
-                    if (p1.indexOf(".") >= 0) {
+                    if (p1.indexOf(".") >= 0) { //@todo: update to regular expression word.word
                         var parts = p1.split(".");
                         return $this.cache[parts[0]][parts[1]];
                     } else {
-
                         return item[p1];
-
                     }
                 });
             }
