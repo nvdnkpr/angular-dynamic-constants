@@ -10,7 +10,7 @@ and generate dynamic constants from these files so that they can share values.
 This is an example on how to create configuration files.
 
 config/server.json.js
-```
+```javascript
 adc.set({
     server: {
         protocol: "http",
@@ -22,7 +22,7 @@ adc.set({
 
 config/endpoints.json.js
 
-```
+```javascript
 adc.set({
     endpoints: {
         api: "{server.protocol}://{server.host}:{server.port}/api"
@@ -31,7 +31,7 @@ adc.set({
 ```
 
 config/services.json.js
-```
+```javascript
 adc.set({
     services: {
         version: 1,
@@ -41,7 +41,8 @@ adc.set({
 ```
 
 HTML
-```
+----
+```javascript
 <script src="src/angular-dynamic-constants.js"></script>
 <script src="config/server.json.js"></script>
 <script src="config/endpoints.json.js"></script>
@@ -49,7 +50,8 @@ HTML
 ```
 
 ANGULAR
-```
+-------
+```javascript
 var app = angular.module("app", []);
 
 var c = new AngularDynamicConstants({
@@ -61,7 +63,7 @@ var c = new AngularDynamicConstants({
 
 From Example
 
-```
+```javascript
 app.controller('Ctrl', ['$scope', 'Config', function($scope, Config){
 
     $scope.config = Config.services.contacts
