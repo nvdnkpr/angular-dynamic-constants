@@ -1,0 +1,3 @@
+define([
+    'suite/test'
+], function () {});
