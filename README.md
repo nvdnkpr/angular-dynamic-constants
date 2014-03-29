@@ -1,7 +1,7 @@
 angular-dynamic-constants
 =========================
 
-Angular Dynamic Constants is a javascript helper that allows you to separate configuration files into small files and using expressions allows you to use "constants within constants".
+Angular Dynamic Constants is a javascript helper that allows you to separate configuration files into small files. Using expressions allows you to have "constants within constants".
 
 ## How to use it
 
