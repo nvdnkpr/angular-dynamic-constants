@@ -1,17 +1,53 @@
 angular-dynamic-constants
 =========================
 
-Angular configuration files can get large and applying DRY can be tedious.
+In Angular you can use .constant() to store configuration settings need it across the application.
+The more flexible you want you application to be, the larger the configuration files are.
 
-In this project I provide a solution to separate configuration files into small files
-and generate dynamic constants from these files so that they can share values.
+Angular Dynamic Constants allows you to separate configuration files into small files and
+use dynamic values so that they can be reused.
+
+Basic usage
+-------------
+
+Configuration files syntax
+```javascript
+Ngdc.set({
+    name: {
+       key: "value"
+    }
+});
+```
+
+Initialisation
+```javascript
+var app = angular.module("app", []);
+
+Ngdc.config({app: app, constant: "Config"});
+
+```
+
+Then you'll have access to the Config constant
+
+```javascript
+app.controller('Ctrl', ['Config', function(Config){
+
+    var key = Config.name.key;
+    // "value"
+
+}]);
+
+```
+
+
+
 
 
 This is an example on how to create configuration files.
 
 config/server.json.js
 ```javascript
-adc.set({
+Ngdc.set({
     server: {
         protocol: "http",
         host: "localhost",
@@ -23,7 +59,7 @@ adc.set({
 config/endpoints.json.js
 
 ```javascript
-adc.set({
+Ngdc.set({
     endpoints: {
         api: "{server.protocol}://{server.host}:{server.port}/api"
     }
@@ -32,7 +68,7 @@ adc.set({
 
 config/services.json.js
 ```javascript
-adc.set({
+Ngdc.set({
     services: {
         version: 1,
         contacts: "{endpoints.api}/v{version}/contacts"
@@ -49,16 +85,7 @@ HTML
 <script src="config/services.json.js"></script>
 ```
 
-ANGULAR
--------
-```javascript
-var app = angular.module("app", []);
 
-var c = new AngularDynamicConstants({
-    app: app,
-    constant: "Config"
-});
-```
 
 
 From Example

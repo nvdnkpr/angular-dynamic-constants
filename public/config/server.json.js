@@ -1,4 +1,4 @@
-adc.set({
+Ngdc.set({
     server: {
         protocol: "http",
         host: "localhost",

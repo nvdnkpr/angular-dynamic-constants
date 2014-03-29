@@ -2,7 +2,7 @@
 
     var app = angular.module('app', []);
 
-    var ngDynC = new AngularDynamicConstants({
+    Ngdc.config({
         app: app,
         constant: "Config"
     });
