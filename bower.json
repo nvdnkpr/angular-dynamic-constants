@@ -6,7 +6,7 @@
     "yago.ferrer@gmail.com"
   ],
   "description": "separate configuration files into small files and generate dynamic constants",
-  "license": "GPL v2",
+  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
