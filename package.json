@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "description": "Angular Dynamic Constants allows you to separate configuration files into small files. Using expressions allows you to have constants within constants.",
   "main": "gulpfile.js",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-      "ecstatic": "~0.4.13",
-      "gulp": "~3.6.0"
+    "ecstatic": "~0.4.13",
+    "gulp": "~3.6.0",
+    "intern": "^1.5.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
