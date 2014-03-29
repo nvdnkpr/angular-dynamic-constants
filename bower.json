@@ -5,7 +5,7 @@
   "authors": [
     "yago.ferrer@gmail.com"
   ],
-  "description": "separate configuration files into small files and generate dynamic constants",
+  "description": "Angular Dynamic Constants allows you to separate configuration files into small files. Using expressions allows you to have constants within constants.",
   "license": "MIT",
   "ignore": [
     "**/.*",
