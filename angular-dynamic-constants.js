@@ -34,6 +34,7 @@
                 item = this.cache[i];
 
                 //@todo: move this to a method.
+                //@todo: add logic for more nested levels.
                 for (var j in item) {
                     item[j] = item[j].replace(/\{([A-Za-z0-9_.]+)\}/g, function(m, p1) {
                         if (p1.indexOf(".") >= 0) { //@todo: update to regular expression word.word
