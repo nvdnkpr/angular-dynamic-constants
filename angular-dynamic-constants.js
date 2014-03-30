@@ -21,6 +21,28 @@
             }
 
         },
+
+        get: function(key)
+        {
+            if (key.indexOf(".") >= 0) { //@todo: update to regular expression word.word
+                var parts = key.split(".");
+
+                if (this.cache[parts[0]][parts[1]]) {
+                    return this.cache[parts[0]][parts[1]];
+                }
+
+                console.warn("%s cannot be found", key);
+            } else {
+                if (self[key]) {
+                    return self[key];
+                } else if (this.cache[key]) {
+                    return this.cache[key];
+                }
+
+                console.warn("%s cannot be found", key);
+            }
+        },
+
         config: function(setup) {
 
             var $this = this;
@@ -64,23 +86,8 @@
             var $this = this;
 
             item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, p1) {
-                if (p1.indexOf(".") >= 0) { //@todo: update to regular expression word.word
-                    var parts = p1.split(".");
 
-                    if ($this.cache[parts[0]][parts[1]]) {
-                        return $this.cache[parts[0]][parts[1]];
-                    }
-
-                    console.warn("%s cannot be found", p1);
-                } else {
-                    if (self[p1]) {
-                        return self[p1];
-                    } else if ($this.cache[p1]) {
-                        return $this.cache[p1];
-                    }
-
-                    console.warn("%s cannot be found", p1);
-                }
+               return $this.get(p1);
 
             });
         }
