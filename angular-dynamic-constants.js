@@ -38,7 +38,15 @@
                     if (angular.isArray(item[j])) {
 
                         for (var x in item[j]) {
-                            item[j][x] = this.update(item, item[j][x]);
+
+                            var result = this.update(item, item[j][x]);
+
+                            if (angular.isArray(result)) {
+                                delete item[j][x];
+                                angular.extend(item[j], result);
+                            } else {
+                                item[j][x] = result;
+                            }
                         }
 
                     } else {
