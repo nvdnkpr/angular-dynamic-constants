@@ -38,11 +38,11 @@
                     if (angular.isArray(item[j])) {
 
                         for (var x in item[j]) {
-                            item[j][x] = this.update(item[j][x]);
+                            item[j][x] = this.update(item, item[j][x]);
                         }
 
                     } else {
-                        item[j] = this.update(item[j]);
+                        item[j] = this.update(item, item[j]);
                     }
                 }
             }
@@ -51,16 +51,27 @@
         },
 
         //@todo: This method needs to be private
-        update: function(item) {
+        update: function(self, item) {
 
             var $this = this;
 
             item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, p1) {
                 if (p1.indexOf(".") >= 0) { //@todo: update to regular expression word.word
                     var parts = p1.split(".");
-                    return $this.cache[parts[0]][parts[1]];
+
+                    if ($this.cache[parts[0]][parts[1]]) {
+                        return $this.cache[parts[0]][parts[1]];
+                    }
+
+                    console.warn("%s cannot be found", p1);
                 } else {
-                    return item[p1];
+                    if (self[p1]) {
+                        return self[p1];
+                    } else if ($this.cache[p1]) {
+                        return $this.cache[p1];
+                    }
+
+                    console.warn("%s cannot be found", p1);
                 }
 
             });
