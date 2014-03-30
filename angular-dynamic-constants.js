@@ -29,25 +29,41 @@
 
             var item;
 
-
             for (var i in this.cache) {
                 item = this.cache[i];
 
-                //@todo: move this to a method.
                 //@todo: add logic for more nested levels.
                 for (var j in item) {
-                    item[j] = item[j].replace(/\{([A-Za-z0-9_.]+)\}/g, function(m, p1) {
-                        if (p1.indexOf(".") >= 0) { //@todo: update to regular expression word.word
-                            var parts = p1.split(".");
-                            return $this.cache[parts[0]][parts[1]];
-                        } else {
-                            return item[p1];
+
+                    if (angular.isArray(item[j])) {
+
+                        for (var x in item[j]) {
+                            item[j][x] = this.update(item[j][x]);
                         }
-                    });
+
+                    } else {
+                        item[j] = this.update(item[j]);
+                    }
                 }
             }
 
             app.constant(setup.constant, this.cache);
+        },
+
+        //@todo: This method needs to be private
+        update: function(item) {
+
+            var $this = this;
+
+            item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, p1) {
+                if (p1.indexOf(".") >= 0) { //@todo: update to regular expression word.word
+                    var parts = p1.split(".");
+                    return $this.cache[parts[0]][parts[1]];
+                } else {
+                    return item[p1];
+                }
+
+            });
         }
     };
 
