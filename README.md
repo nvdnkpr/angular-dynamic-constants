@@ -4,7 +4,7 @@ angular-dynamic-constants
 Angular Dynamic Constants allows you to set configuration parameters where one depends on another.
 Allowing you to use small configuration files so that you can keep your code organized.
 
-###  How to use it
+###  How to use it ###
 
 ```js
 // File: server.json.js
@@ -29,7 +29,7 @@ var app = angular.module("app", []);
 Ngdc.config({app: app, constant: "Config"});
 ```
 
-### And you will have something like this:
+### And you will have something like this: ###
 ```js
 // Config (Angular Constant)
 {
@@ -46,7 +46,7 @@ Ngdc.config({app: app, constant: "Config"});
 ```
 
 
-### How to use it in an Angular controller.
+### How to use it in an Angular controller. ###
 
 ```js
 app.controller('Ctrl', ['Config', function(Config){
@@ -59,10 +59,20 @@ app.controller('Ctrl', ['Config', function(Config){
 
 }]);
 ```
+### Using Angular Dynamic Constants ###
 
-## Why I created this
-In Angular you can use .constant() to store configuration global settings. The more flexible you want you application to be, the larger the configuration files.
-Larger configuration files are hard to maintain and you end up with a string concatenation mess.
+Is available through [bower](http://bower.io/):
+
+```bash
+# using bower
+bower install angular-dynamic-constants
+```
+
+
+### Why I created this ###
+Suppose that you'd like to have set of configuration files with parameters where one depends on another, but we don’t want to repeat this value again and again.
+The more flexible you want you application to be, the larger the configuration files, the more that you have to repeat yourself. I created Angular Dynamic Constants
+to provide a solution for this problem.
 
 
 
