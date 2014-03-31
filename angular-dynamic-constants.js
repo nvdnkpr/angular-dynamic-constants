@@ -6,6 +6,8 @@
 (function(window, document, angular, undefined) {
     'use strict';
 
+    var id = "[angular dynamic constants]";
+
     window.Ngdc = {
         cache: {},
         set: function(json) {
@@ -31,14 +33,14 @@
                     return this.cache[parts[0]][parts[1]];
                 }
 
-                console.warn("%s cannot be found", key);
+                console.warn("%s %s cannot be found", id, key);
             } else {
 
                 if (this.cache[key]) {
                     return this.cache[key];
                 }
 
-                console.warn("%s cannot be found", key);
+                console.warn("%s %s cannot be found", id , key);
             }
         },
 
@@ -161,7 +163,7 @@
                     return this.cache[parts[0]][parts[1]];
                 }
 
-                console.warn("%s cannot be found", value);
+                console.warn("%s %s cannot be found", id, value);
             } else {
 
                 if (typeof properties !== "undefined" && properties[value]) {
@@ -170,7 +172,7 @@
                     return this.cache[value];
                 }
 
-                console.warn("%s cannot be found", key);
+                console.warn("%s %s cannot be found", id, value);
             }
         }
 
