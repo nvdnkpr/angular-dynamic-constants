@@ -79,10 +79,12 @@
 
                         var result = $this.replace(variable, properties);
 
-                        if (angular.isObject(result) || angular.isArray(result)) {
+                        if (!angular.isString(result)) {
                             objResult = result;
                         }
+
                         return result;
+
                     });
 
                     return (objResult) ? objResult : result;

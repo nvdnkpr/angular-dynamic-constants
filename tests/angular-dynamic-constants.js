@@ -54,6 +54,9 @@ define([
                     ],
                     objTestResult: "{objTest}",
 
+                    intTest: 1,
+                    intTestResult: "{intTest}",
+
                     notFoundTest: "{notFound}"
 
 
@@ -94,8 +97,12 @@ define([
                 expect(Ngdc.cache.level1.level2.level3.level4).to.eql("Angular Dynamic Constants");
             });
 
-            bdd.it("should replace variables with objects or arrays", function(){
-               expect(Ngdc.cache.objTest).to.eql([{a:"b"}]);
+            bdd.it("should replace variables with objects, arrays", function(){
+               expect(Ngdc.cache.intTestResult).to.eql(1);
+            });
+
+            bdd.it("should replace variables with integers", function(){
+                expect(Ngdc.cache.objTest).to.eql([{a:"b"}]);
             });
 
             bdd.it("should keep the same variable if cannot find the proper value", function(){
