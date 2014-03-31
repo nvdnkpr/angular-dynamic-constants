@@ -11,7 +11,8 @@ Angular Dynamic Constants is a javascript helper that allows you to separate con
 Ngdc.set({
     server: {
        url: "http://my.site/"
-    }
+    },
+    apis:["http://ser.ver/api", "{endpoints.api}"]
 });
 
 // File: endpoints.json.js
@@ -22,11 +23,6 @@ Ngdc.set({
     }
 });
 
-Ngdc.set({
-    url: {
-        list:["http://ser.ver/api", "{endpoints.api}"]
-    }
-});
 ```
 
 ### HTML
@@ -54,7 +50,7 @@ app.controller('Ctrl', ['Config', function(Config){
     var apiURL = Config.endpoints.api;
     // "http://my.site/api/v1"
 
-    var urls = Conf.url.list
+    var urls = Conf.server.apis
     // ["http://ser.ver/api", "http://my.site/api/v1"]
 
 }]);
