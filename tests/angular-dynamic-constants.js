@@ -52,7 +52,9 @@ define([
                     objTest: [
                         {a: "b"}
                     ],
-                    objTestResult: "{objTest}"
+                    objTestResult: "{objTest}",
+
+                    notFoundTest: "{notFound}"
 
 
                 };
@@ -94,6 +96,10 @@ define([
 
             bdd.it("should replace variables with objects or arrays", function(){
                expect(Ngdc.cache.objTest).to.eql([{a:"b"}]);
+            });
+
+            bdd.it("should keep the same variable if cannot find the proper value", function(){
+                expect(Ngdc.cache.notFoundTest).to.eql("{notFound}");
             });
 
         });

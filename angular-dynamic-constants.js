@@ -176,6 +176,7 @@
                 }
 
                 console.warn("%s %s cannot be found", id, value);
+                return "{" + value + "}";
             } else {
 
                 if (typeof properties !== "undefined" && properties[value]) {
@@ -186,6 +187,7 @@
                 }
 
                 console.warn("%s %s cannot be found", id, value);
+                return "{" + value + "}";
             }
         }
 
