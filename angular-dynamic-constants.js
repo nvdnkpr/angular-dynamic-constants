@@ -68,9 +68,13 @@
 
 
             } else {
-                return item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, variable) {
-                    return $this.replace(variable, properties);
-                });
+                if (angular.isString(item)) {
+                    return item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, variable) {
+                        return $this.replace(variable, properties);
+                    });
+                } else {
+                    return item;
+                }
             }
 
         },
