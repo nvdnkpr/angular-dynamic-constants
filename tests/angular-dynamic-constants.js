@@ -3,7 +3,7 @@ define([
     'intern!bdd',
     'intern/order!angular/angular',
     'intern/order!angular-mocks/angular-mocks',
-    'intern/order!/src/angular-dynamic-constants'
+    'intern/order!angular-dynamic-constants'
 ], function (expect, bdd) {
 
     bdd.describe('Angular Dynamic Constants', function(){

@@ -57,8 +57,7 @@ define({
 		// Packages that should be registered with the loader in each testing environment
 		packages: [
             { name: 'angular', location: 'bower_components/angular' },
-            { name: 'angular-mocks', location: 'bower_components/angular-mocks' },
-            { name: 'angular-dynamic-constants', location: 'src' }
+            { name: 'angular-mocks', location: 'bower_components/angular-mocks' }
         ]
 	},
 
