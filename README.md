@@ -1,6 +1,7 @@
 angular-dynamic-constants
 =========================
 
+Constants in Angular are great to store configuration parameters, but once they are set, the value cannot be altered.
 Angular Dynamic Constants allows you to set configuration parameters where one depends on another.
 Allowing you to use small configuration files so that you can keep your code organized.
 
@@ -65,7 +66,7 @@ Is available through [bower](http://bower.io/):
 
 ```bash
 # using bower
-bower install angular-dynamic-constants
+bower install angular-dynamic-constants --save
 ```
 
 
