@@ -1,11 +1,11 @@
 angular-dynamic-constants
 =========================
 
-Angular Dynamic Constants is a javascript helper that allows you to separate configuration files into small files. Using expressions allows you to have "constants within constants".
+Angular Dynamic Constants allows you to set configuration parameters where one depends on another.
+Allowing you to use small configuration files so that you can keep your code organized.
 
-## How to use it
+###  How to use it
 
-### Configuration files.
 ```js
 // File: server.json.js
 Ngdc.set({
@@ -23,26 +23,30 @@ Ngdc.set({
     }
 });
 
-```
-
-### HTML
-
-```html
-<script src="bower_components/angular-dynamic-constants.min.js"></script>
-<script src="config/server.json.js"></script>
-<script src="config/endpoints.json.js"></script>
-```
-
-### Setup
-```javascript
 // File: app.js
 var app = angular.module("app", []);
 
 Ngdc.config({app: app, constant: "Config"});
+```
+
+### And you will have something like this:
+```js
+// Config (Angular Constant)
+{
+    server: {
+        url: "http://my.site/"
+    },
+    endpoints: {
+       version: "v1",
+       api: "http://my.site/api/v1"
+    }
+    apis: ["http://ser.ver/api", "http://my.site/api/v1"]
+}
 
 ```
 
-### How to get configuration settings
+
+### How to use it in an Angular controller.
 
 ```js
 app.controller('Ctrl', ['Config', function(Config){
