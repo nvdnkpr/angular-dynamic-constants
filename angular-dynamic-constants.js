@@ -54,43 +54,51 @@
             setup.app.constant(setup.constant, this.cache);
         },
 
+        replaceVariables: function(item, properties)
+        {
+            var $this = this;
+
+            return item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, variable) {
+                return $this.replace(variable, properties);
+            });
+        },
+
         update: function() {
 
-            var properties, item, $this = this;
+            var properties, item, result, $this = this;
 
             for (var name in this.cache) {
 
                 properties = this.cache[name];
 
-                for (var value in properties) {
+                if (typeof properties === "string") {
 
-                    item = properties[value];
+                    if (this.hasVariable(properties)) {
+                        properties = this.replaceVariables(properties);
+                    }
 
-                    if ( (typeof item === "string") && this.hasVariable(item)) {
+                } else  {
 
-                        this.cache[name][value] = item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, variable) {
+                    for (var value in properties) {
+                        item = properties[value];
 
-                            return $this.replace(properties, variable);
+                        if ( (typeof item === "string") && this.hasVariable(item)) {
 
-                        });
-                    } else if (Object.prototype.toString.call(item) == '[object Array]') {
+                            this.cache[name][value] = this.replaceVariables(item, properties);
 
-                       for (var i in item) {
 
-                           if (this.hasVariable(item[i])) {
+                        } else if (Object.prototype.toString.call(item) == '[object Array]') {
 
-                               item[i] = item[i].replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, variable) {
-
-                                   return $this.replace(properties, variable);
-
-                               });
-
-                           }
-
-                       }
-
+                            for (var i in item) {
+                                if (this.hasVariable(item[i])) {
+                                    item[i] = this.replaceVariables(item[i], properties);
+                                }
+                            }
+                        }
                     }
                 }
+
+
             }
 
         },
@@ -108,7 +116,7 @@
 
         },
 
-        replace: function(properties, value)
+        replace: function(value, properties)
         {
             //console.log("replace", properties, value);
 
@@ -123,7 +131,7 @@
                 console.warn("%s cannot be found", value);
             } else {
 
-                if (properties[value]) {
+                if (typeof properties !== "undefined" && properties[value]) {
                     return properties[value];
                 } else if (this.cache[value]) {
                     return this.cache[value];

@@ -8,59 +8,89 @@ define([
 
     bdd.describe('Angular Dynamic Constants', function(){
 
-        bdd.it("should have an empty object cache", function(){
-            expect(Ngdc.cache).to.be.empty;
+
+        bdd.describe("Cache", function() {
+            bdd.it("should be an empty object", function(){
+                expect(Ngdc.cache).to.be.empty;
+            });
         });
 
-        bdd.it("should save key/values in cache", function(){
+        bdd.describe("hasVariable", function(){
+            bdd.it("should return true/false if a variable is present", function(){
 
-            var server = {
-                server: {url: "http://my.site"},
-                endpoints: {
-                    version: "v1",
-                    api: "{server.url}/api/{version}"
-                },
-                urls: {list: ["http://ser.ver/api", "{endpoints.api}"]}
-            };
+                expect(Ngdc.hasVariable("{server.url}")).to.be.true;
 
-            Ngdc.set(Ngdc.set(server));
+                expect(Ngdc.hasVariable("{fail")).to.be.false;
 
-            expect(Ngdc.cache).to.eql(server);
-
+            });
         });
 
-        bdd.it("should merge properties if set() has the same key", function(){
-            Ngdc.set({server: {name: "site"}});
-            expect(Ngdc.cache.server).to.eql({url: "http://my.site", name: "site"});
-        });
 
-        bdd.it("update() should replace variables", function(){
+        bdd.describe("set", function() {
 
-            Ngdc.update();
-            var api = Ngdc.cache.endpoints.api;
+            bdd.it("should save key/values in cache", function(){
 
-            expect(api).to.eql("http://my.site/api/v1");
-        });
+                var server = {
+                    app: "appName",
+                    server: {url: "http://my.site"},
+                    endpoints: {
+                        version: "v1",
+                        api: "{server.url}/api/{version}"
+                    },
+                    urls: {list: ["http://ser.ver/api", "{endpoints.api}"]}
+                };
 
-        bdd.it("hasVariable({server.url}) should return true", function(){
+                Ngdc.set(Ngdc.set(server));
 
-            expect(Ngdc.hasVariable("{server.url}")).to.be.true;
+                expect(Ngdc.cache).to.eql(server);
 
-            expect(Ngdc.hasVariable("{fail")).to.be.false;
+            });
 
-        });
-
-        bdd.it("it should replace variables in arrays", function(){
-
-            expect(Ngdc.cache.urls.list[1]).to.eql("http://my.site/api/v1");
+            bdd.it("it should merge properties with the same key", function(){
+                Ngdc.set({server: {name: "site"}});
+                expect(Ngdc.cache.server).to.eql({url: "http://my.site", name: "site"});
+            });
 
         });
 
-        bdd.it("get() should get values from cache", function(){
+        bdd.describe("update", function(){
+            bdd.it("should replace variables", function(){
 
-            expect(Ngdc.get("server.name")).to.equal("site");
+                Ngdc.update();
+                var api = Ngdc.cache.endpoints.api;
+
+                expect(api).to.eql("http://my.site/api/v1");
+            });
+
+            bdd.it("should replace variables in arrays", function(){
+
+                expect(Ngdc.cache.urls.list[1]).to.eql("http://my.site/api/v1");
+
+            });
+        });
+
+        bdd.describe("replaceVariables", function(){
+            bdd.it("should replace variables", function(){
+
+                var result = Ngdc.replaceVariables("{server.url}/api/{version}", Ngdc.cache.endpoints);
+
+                expect(result).to.equal("http://my.site/api/v1");
+
+            });
+        });
+
+        bdd.describe("get()", function(){
+
+            bdd.it("should get values from cache", function(){
+                expect(Ngdc.get("server.name")).to.equal("site");
+            });
 
         });
+
+
+
+
+
 
     });
 
