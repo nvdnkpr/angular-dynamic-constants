@@ -1,7 +1,7 @@
 angular-dynamic-constants
 =========================
 
-Constants in Angular are great to store configuration parameters, but once they are set, the value cannot be altered.
+Constants in Angular are great to store configuration parameters but because they are constants, once they are set, the value cannot be altered.
 Angular Dynamic Constants allows you to set configuration parameters where one depends on another.
 Allowing you to use small configuration files so that you can keep your code organized.
 
