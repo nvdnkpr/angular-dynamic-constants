@@ -14,7 +14,7 @@ gulp.task('dev', function(){
 });
 
 gulp.task('deploy', function(){
-    return gulp.src(['src/angular-dynamic-constants.js'])
+    return gulp.src(['angular-dynamic-constants.js'])
         .pipe(uglify())
         .pipe(concat('angular-dynamic-constants.min.js'))
         .pipe(gulp.dest('.'));
