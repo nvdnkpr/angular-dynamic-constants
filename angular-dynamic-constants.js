@@ -129,13 +129,20 @@
                 }
 
             } else {
-                var find = "\{[A-Za-z0-9_.]+\}";
 
-                var re = new RegExp(find, 'g');
+                if (angular.isString(item)) {
+                    var find = "\{[A-Za-z0-9_.]+\}";
 
-                var result = item.match(re);
+                    var re = new RegExp(find, 'g');
 
-                return (result !== null) ? true : false;
+                    var result = item.match(re);
+
+                    return (result !== null) ? true : false;
+                }
+
+                return false;
+
+
             }
         },
 
