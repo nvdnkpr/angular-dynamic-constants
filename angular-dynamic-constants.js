@@ -19,8 +19,6 @@
                     this.cache[i] = json[i];
                 }
             }
-
-
         },
 
         get: function(key)
@@ -70,10 +68,25 @@
 
 
             } else {
+
                 if (angular.isString(item)) {
-                    return item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, variable) {
-                        return $this.replace(variable, properties);
+
+
+                    var objResult = false;
+
+
+                    var result = item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, variable) {
+
+                        var result = $this.replace(variable, properties);
+
+                        if (angular.isObject(result) || angular.isArray(result)) {
+                            objResult = result;
+                        }
+                        return result;
                     });
+
+                    return (objResult) ? objResult : result;
+
                 } else {
                     return item;
                 }
@@ -83,7 +96,7 @@
 
         update: function() {
 
-            var properties, item, result, $this = this;
+            var properties, item, $this = this;
 
             for (var name in this.cache) {
 
@@ -92,7 +105,8 @@
                 if (angular.isString(properties)) {
 
                     if (this.hasVariable(properties)) {
-                        properties = this.replaceVariables(properties);
+                        var result = this.replaceVariables(properties, this.cache);
+                        this.cache[name] = result;
                     }
 
                 } else  {
@@ -109,8 +123,6 @@
                             if (this.hasVariable(item)) {
                                 item = this.replaceVariables(item, properties);
                             }
-
-
 
                         }
                     }
@@ -167,6 +179,7 @@
             } else {
 
                 if (typeof properties !== "undefined" && properties[value]) {
+
                     return properties[value];
                 } else if (this.cache[value]) {
                     return this.cache[value];

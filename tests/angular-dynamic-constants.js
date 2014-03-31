@@ -32,7 +32,9 @@ define([
 
                 var server = {
                     app: "Angular Dynamic Constants",
-                    server: {url: "http://my.site"},
+                    server: {
+                        url: "http://my.site"
+                    },
                     endpoints: {
                         version: "v1",
                         api: "{server.url}/api/{version}"
@@ -41,11 +43,18 @@ define([
                     level1: {
                         level2: {
                             level3: {
-                                level4: "{endpoints.api}"
+                                level4: "{app}"
                             }
 
                         }
-                    }
+                    },
+
+                    objTest: [
+                        {a: "b"}
+                    ],
+                    objTestResult: "{objTest}"
+
+
                 };
 
                 Ngdc.set(Ngdc.set(server));
@@ -80,8 +89,12 @@ define([
 
             bdd.it("should replace variables in nested arrays", function(){
 
-                expect(Ngdc.cache.level1.level2.level3.level4).to.eql("http://my.site/api/v1");
-            })
+                expect(Ngdc.cache.level1.level2.level3.level4).to.eql("Angular Dynamic Constants");
+            });
+
+            bdd.it("should replace variables with objects or arrays", function(){
+               expect(Ngdc.cache.objTest).to.eql([{a:"b"}]);
+            });
 
         });
 
