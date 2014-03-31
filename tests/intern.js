@@ -56,15 +56,14 @@ define({
 	loader: {
 		// Packages that should be registered with the loader in each testing environment
 		packages: [
-            { name: 'angular-dynamic-constants', location: '.' },
             { name: 'angular', location: 'bower_components/angular' },
-            { name: 'angular-mocks', location: 'bower_components/angular-mocks' }
-
+            { name: 'angular-mocks', location: 'bower_components/angular-mocks' },
+            { name: 'angular-dynamic-constants', location: 'src' }
         ]
 	},
 
 	// Non-functional test suite(s) to run in each browser
-	suites: ['test/all' ],
+	suites: ['tests/angular-dynamic-constants'],
 
 	// Functional test suite(s) to run in each browser once non-functional tests are completed
 	functionalSuites: [ /* 'myPackage/tests/functional' */ ],

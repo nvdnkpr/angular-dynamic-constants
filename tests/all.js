@@ -1,3 +1,0 @@
-define([
-    'suite/test'
-], function () {});
