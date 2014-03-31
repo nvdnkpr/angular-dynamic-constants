@@ -18,6 +18,7 @@
                 }
             }
 
+
         },
 
         get: function(key)
@@ -58,9 +59,20 @@
         {
             var $this = this;
 
-            return item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, variable) {
-                return $this.replace(variable, properties);
-            });
+            if (angular.isArray(item) || angular.isObject(item)) {
+                for (var i in item) {
+                    item[i] = this.replaceVariables(item[i], properties);
+                }
+
+                return item;
+
+
+            } else {
+                return item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, variable) {
+                    return $this.replace(variable, properties);
+                });
+            }
+
         },
 
         update: function() {
@@ -71,7 +83,7 @@
 
                 properties = this.cache[name];
 
-                if (typeof properties === "string") {
+                if (angular.isString(properties)) {
 
                     if (this.hasVariable(properties)) {
                         properties = this.replaceVariables(properties);
@@ -82,18 +94,18 @@
                     for (var value in properties) {
                         item = properties[value];
 
-                        if ( (typeof item === "string") && this.hasVariable(item)) {
+                        if ( (angular.isString(item)) && this.hasVariable(item)) {
 
                             this.cache[name][value] = this.replaceVariables(item, properties);
 
+                        } else if (angular.isArray(item) || angular.isObject(item)) {
 
-                        } else if (Object.prototype.toString.call(item) == '[object Array]') {
-
-                            for (var i in item) {
-                                if (this.hasVariable(item[i])) {
-                                    item[i] = this.replaceVariables(item[i], properties);
-                                }
+                            if (this.hasVariable(item)) {
+                                item = this.replaceVariables(item, properties);
                             }
+
+
+
                         }
                     }
                 }
@@ -103,22 +115,32 @@
 
         },
 
+
         //@todo: convert this to angular promises
         hasVariable: function(item)
         {
-            var find = "\{[A-Za-z0-9_.]+\}";
 
-            var re = new RegExp(find, 'g');
+            if (angular.isArray(item) || angular.isObject(item)) {
 
-            var result = item.match(re);
+                for (var i in item) {
+                    if (this.hasVariable(item[i]) === true) {
+                        return true;
+                    }
+                }
 
-            return (result !== null) ? true : false;
+            } else {
+                var find = "\{[A-Za-z0-9_.]+\}";
 
+                var re = new RegExp(find, 'g');
+
+                var result = item.match(re);
+
+                return (result !== null) ? true : false;
+            }
         },
 
         replace: function(value, properties)
         {
-            //console.log("replace", properties, value);
 
             if (value.indexOf(".") >= 0) { //@todo: update to regular expression word.word
 

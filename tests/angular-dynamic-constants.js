@@ -31,13 +31,21 @@ define([
             bdd.it("should save key/values in cache", function(){
 
                 var server = {
-                    app: "appName",
+                    app: "Angular Dynamic Constants",
                     server: {url: "http://my.site"},
                     endpoints: {
                         version: "v1",
                         api: "{server.url}/api/{version}"
                     },
-                    urls: {list: ["http://ser.ver/api", "{endpoints.api}"]}
+                    urls: {list: ["http://ser.ver/api", "{endpoints.api}"]},
+                    level1: {
+                        level2: {
+                            level3: {
+                                level4: "{endpoints.api}"
+                            }
+
+                        }
+                    }
                 };
 
                 Ngdc.set(Ngdc.set(server));
@@ -46,10 +54,12 @@ define([
 
             });
 
+
             bdd.it("it should merge properties with the same key", function(){
                 Ngdc.set({server: {name: "site"}});
                 expect(Ngdc.cache.server).to.eql({url: "http://my.site", name: "site"});
             });
+
 
         });
 
@@ -62,11 +72,17 @@ define([
                 expect(api).to.eql("http://my.site/api/v1");
             });
 
+
             bdd.it("should replace variables in arrays", function(){
-
                 expect(Ngdc.cache.urls.list[1]).to.eql("http://my.site/api/v1");
-
             });
+
+
+            bdd.it("should replace variables in nested arrays", function(){
+
+                expect(Ngdc.cache.level1.level2.level3.level4).to.eql("http://my.site/api/v1");
+            })
+
         });
 
         bdd.describe("replaceVariables", function(){
