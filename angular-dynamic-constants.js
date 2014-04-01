@@ -171,10 +171,22 @@
 
             if (value.indexOf(".") >= 0) { //@todo: update to regular expression word.word
 
-                var parts = value.split(".");
+                var parts = value.split("."), part, result;
 
-                if (this.cache[parts[0]][parts[1]]) {
-                    return this.cache[parts[0]][parts[1]];
+                var cache = this.cache, error = false;
+
+                for (var i = 0, len = parts.length; i < len; i++) {
+
+                    if (cache[parts[i]]) {
+                        cache = cache[parts[i]];
+                    } else {
+                        error = true;
+                    }
+
+                }
+
+                if (error === false) {
+                    return cache;
                 }
 
                 console.warn("%s %s cannot be found", id, value);

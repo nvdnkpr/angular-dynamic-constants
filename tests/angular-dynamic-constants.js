@@ -57,7 +57,9 @@ define([
                     intTest: 1,
                     intTestResult: "{intTest}",
 
-                    notFoundTest: "{notFound}"
+                    notFoundTest: "{notFound}",
+
+                    multiLevelTest: "{level1.level2.level3.level4}"
 
 
                 };
@@ -107,6 +109,10 @@ define([
 
             bdd.it("should keep the same variable if cannot find the proper value", function(){
                 expect(Ngdc.cache.notFoundTest).to.eql("{notFound}");
+            });
+
+            bdd.it("should be able to replace values from multiple levels deep", function(){
+                expect(Ngdc.cache.multiLevelTest).to.eql("Angular Dynamic Constants");
             });
 
         });
