@@ -59,7 +59,12 @@ define([
 
                     notFoundTest: "{notFound}",
 
-                    multiLevelTest: "{level1.level2.level3.level4}"
+                    multiLevelTest: "{level1.level2.level3.level4}",
+
+
+                    intStrTest: 1,
+
+                    intStrTestResult: "a{intStrTest}"
 
 
                 };
@@ -114,6 +119,12 @@ define([
             bdd.it("should be able to replace values from multiple levels deep", function(){
                 expect(Ngdc.cache.multiLevelTest).to.eql("Angular Dynamic Constants");
             });
+
+            bdd.it("should be able to combine integers and strings when replacing values", function(){
+                expect(Ngdc.cache.intStrTestResult).to.eql("a1");
+            });
+
+
 
         });
 

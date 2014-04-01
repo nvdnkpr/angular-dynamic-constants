@@ -77,15 +77,19 @@
 
                     var result = item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, variable) {
 
-                        var result = $this.replace(variable, properties);
+                        var replace = $this.replace(variable, properties);
 
-                        if (!angular.isString(result)) {
-                            objResult = result;
+                        if (angular.isArray(replace) || angular.isObject(replace)) {
+                            objResult = replace;
                         }
 
-                        return result;
+                        return replace;
 
                     });
+
+                    if (!isNaN(result)) {
+                        result = parseInt(result);
+                    }
 
                     return (objResult) ? objResult : result;
 
