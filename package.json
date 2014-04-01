@@ -1,6 +1,6 @@
 {
   "name": "angular-dynamic-constants",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Angular Dynamic Constants allows you to separate configuration files into small files. Using expressions allows you to have constants within constants.",
   "main": "gulpfile.js",
   "dependencies": {},
