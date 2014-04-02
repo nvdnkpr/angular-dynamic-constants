@@ -1,5 +1,5 @@
 /**
- * @license Angular Dynamic Constants v1.0.0
+ * @license Angular Dynamic Constants v1.0.4
  * (c) 2014 Yago Ferrer <yago.ferrer@gmail.com>
  * License: MIT
  */
