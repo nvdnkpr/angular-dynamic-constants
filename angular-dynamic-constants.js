@@ -10,6 +10,7 @@
 
     window.Ngdc = {
         cache: {},
+        updated: false,
         set: function(json) {
 
             for (var i in json) {
@@ -23,6 +24,7 @@
 
         get: function(key)
         {
+            this.updateOnce();
 
             if (key.indexOf(".") >= 0) {
                 var parts = key.split(".");
@@ -44,7 +46,7 @@
 
         config: function(setup) {
 
-            this.update();
+            this.updateOnce();
 
             return this.save(setup);
 
@@ -100,9 +102,13 @@
 
         },
 
-        update: function() {
+        updateOnce: function() {
 
-            var properties, item, $this = this;
+            if (this.updated) {
+                return false;
+            }
+
+            var properties, item;
 
             for (var name in this.cache) {
 
@@ -133,9 +139,9 @@
                         }
                     }
                 }
-
-
             }
+
+            this.updated = true;
 
         },
 
