@@ -1,6 +1,5 @@
 angular-dynamic-constants
 =========================
-
 Constants in Angular are great to store configuration parameters but because they are constants, once they are set, the value cannot be altered.
 Angular Dynamic Constants allows you to set configuration parameters where one depends on another.
 Allowing you to use small configuration files so that you can keep your code organized.
@@ -75,6 +74,8 @@ Suppose that you'd like to have set of configuration files with parameters where
 The more flexible you want you application to be, the larger the configuration files, the more that you have to repeat yourself. I created Angular Dynamic Constants
 to provide a solution for this problem.
 
-
-
-
+## Ngdc.get() ##
+```js
+Ngdc.get("server.url");
+// http://my.site/
+```
