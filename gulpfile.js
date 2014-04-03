@@ -10,7 +10,8 @@ gulp.task('dev', function(){
         ecstatic({root: __dirname})
     ).listen(8080);
 
-     //open("http://localhost:8080",{app:"google-chrome"});
+    //@todo open:
+    // http://localhost:8080/node_modules/intern/client.html?config=tests/intern
 });
 
 gulp.task('deploy', function(){
