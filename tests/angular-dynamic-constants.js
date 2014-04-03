@@ -87,7 +87,7 @@ define([
         bdd.describe("update", function(){
             bdd.it("should replace variables", function(){
 
-                Ngdc.update();
+                Ngdc.updateOnce();
                 var api = Ngdc.cache.endpoints.api;
 
                 expect(api).to.eql("http://my.site/api/v1");
