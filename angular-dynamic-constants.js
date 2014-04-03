@@ -76,8 +76,7 @@
 
                     var objResult = false;
 
-
-                    var result = item.replace(/\{([A-Za-z0-9_.]+)\}/g, function (m, variable) {
+                    var result = item.replace(/\{([A-Za-z_][A-Za-z0-9_.]+)\}/g, function (m, variable) {
 
                         var replace = $this.replace(variable, properties);
 

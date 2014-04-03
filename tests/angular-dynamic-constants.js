@@ -136,6 +136,15 @@ define([
                 expect(result).to.equal("http://my.site/api/v1");
 
             });
+
+            bdd.it("should replace only variables that start with either one of the following: A-Za-z_ and not a number", function(){
+
+                var result = Ngdc.replaceVariables("{0}", "test");
+
+                expect(result).to.equal("{0}");
+
+            });
+
         });
 
         bdd.describe("get()", function(){
