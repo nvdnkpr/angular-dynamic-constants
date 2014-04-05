@@ -24,7 +24,7 @@
 
         get: function(key)
         {
-            this.updateOnce();
+            this.update(); // We need to call it each time you do get()
 
             if (key.indexOf(".") >= 0) {
                 var parts = key.split(".");
@@ -101,11 +101,7 @@
 
         },
 
-        updateOnce: function() {
-
-            if (this.updated) {
-                return false;
-            }
+        update: function() {
 
             var properties, item;
 
@@ -139,6 +135,15 @@
                     }
                 }
             }
+        },
+
+        updateOnce: function() {
+
+            if (this.updated) {
+                return false;
+            }
+
+            this.update();
 
             this.updated = true;
 
