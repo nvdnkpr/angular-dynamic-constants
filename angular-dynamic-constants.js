@@ -8,6 +8,27 @@
 
     var id = "[angular dynamic constants]";
 
+    var getValue = function(cache, property) {
+        var list = Array.isArray(property) ? property : property.split('.');
+        var root = list[0];
+
+        // check for flat key value
+        if ( typeof(cache[property]) != "undefined" ) {
+            return cache[property];
+        }
+
+        if ( typeof cache[root] !== 'object' ) {
+            return undefined;
+        }
+
+        if ( list.length <= 1 ) {
+            return cache[root];
+        }
+
+        return getValue(cache[root], list.slice(1));
+    };
+
+
     window.Ngdc = {
         cache: {},
         updated: false,
@@ -18,6 +39,7 @@
                     angular.extend(this.cache[i], json[i]); // If the key exists, merge data.
                 } else {
                     this.cache[i] = json[i];
+
                 }
             }
         },
@@ -26,22 +48,16 @@
         {
             this.updateOnce();
 
-            if (key.indexOf(".") >= 0) {
-                var parts = key.split(".");
+            var value = getValue(this.cache, key);
 
-                if (this.cache[parts[0]][parts[1]]) {
-                    return this.cache[parts[0]][parts[1]];
-                }
+            if (typeof (value) !== "undefined"){
+                return value;
 
-                console.warn("%s %s cannot be found", id, key);
             } else {
-
-                if (this.cache[key]) {
-                    return this.cache[key];
-                }
-
                 console.warn("%s %s cannot be found", id , key);
             }
+
+
         },
 
         config: function(setup) {
